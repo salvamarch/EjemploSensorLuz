@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 TextView luminosidad;
     SensorManager sensorManager;
@@ -19,6 +21,12 @@ TextView luminosidad;
         luminosidad = findViewById(R.id.textViewLuz);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+
+        List<Sensor> listaSensores = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        for (Sensor sensor: listaSensores){
+            System.out.println("Sensor: "+sensor.getName()+" "+sensor.getStringType());
+        }
 
         sensorManager.registerListener((SensorEventListener) this,
                 sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT),
